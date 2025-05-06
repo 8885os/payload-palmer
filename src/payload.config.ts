@@ -60,25 +60,9 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
-  db: vercelPostgresAdapter({
-    pool: {
-      connectionString: process.env.POSTGRES_URL || '',
-    },
-  }),
+  db: {},
   sharp,
-  plugins: [
-    vercelBlobStorage({
-      enabled: true, // Optional, defaults to true
-      collections: {
-        [Media.slug]: {
-          prefix: 'media', // Optional: organizes files in a subfolder
-        },
-      },
-      token: process.env.BLOB_READ_WRITE_TOKEN, // Vercel Blob token
-      clientUploads: true, // Enable for files >4.5MB
-    }),
-    // storage-adapter-placeholder
-  ],
+  plugins: [],
   cors: ['https://payload-cms-dun.vercel.app/', 'https://wdc-test-payload.vercel.app/'], // Allow Next.js app
   csrf: ['https://payload-cms-dun.vercel.app/', 'https://wdc-test-payload.vercel.app/'], // Allow Next.js app
 })
